@@ -16,3 +16,12 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::view('/main','layouts.app',['name'=>'GeoAS']);
+
+Route::view('/user','user',['name'=>'GeoAS']);
+
+Route::view('/login','login',['name'=>'GeoAS']);
+
+Route::view('/about','about',['name'=>'GeoAS']);
+

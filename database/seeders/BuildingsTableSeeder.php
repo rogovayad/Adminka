@@ -1,31 +1,22 @@
 <?php
 
-namespace Database\Factories;
+namespace Database\Seeders;
 
-use Illuminate\Database\Eloquent\Factories\Factory;
-use Illuminate\Support\Str;
+use App\Models\Roles;
+use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use Illuminate\Database\Seeder;
 use App\Models\Buildings;
+use DB;
 
-/**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Buildings>
- */
-class BuildingsFactory extends Factory
+class BuildingsTableSeeder extends Seeder
 {
-    protected $model = Buildings::class;
     /**
-     * Define the model's default state.
+     * Run the database seeds.
      *
-     * @return array<string, mixed>
+     * @return void
      */
-    public function definition()
+    public function run()
     {
-        return [
-            'id_address_eas'=>1,
-            'base_quarter_code'=>'5505',
-            'ground_area_code'=>18,
-            'building_code'=>1,
-            'prim_code'=>10,
-            'id_user'=>1
-        ];
+        Buildings::factory()->create();
     }
 }

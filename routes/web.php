@@ -25,3 +25,9 @@ Route::view('/login','login',['name'=>'GeoAS']);
 
 Route::view('/about','about',['name'=>'GeoAS']);
 
+Route::get('/roles/{id}', function (int $id) {
+    $role=Roles::find($id);
+    dump($role);
+    return $role;
+});
+

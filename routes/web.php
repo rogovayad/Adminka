@@ -1,6 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Models\Roles;
+use App\Http\Controllers\AddressController;
 
 /*
 |--------------------------------------------------------------------------
@@ -18,6 +20,8 @@ Route::get('/', function () {
 });
 
 Route::view('/main','layouts.app',['name'=>'GeoAS']);
+
+Route::resource('address', AddressController::class);
 
 Route::view('/user','user',['name'=>'GeoAS']);
 

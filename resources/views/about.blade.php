@@ -1,5 +1,5 @@
 @extends('layouts.app')
-@section('main')
+@section('content')
     <main class="px-3">
         <h1>This product will allow you:</h1>
         <p class="lead">1.insert into table BD</p>

@@ -18,11 +18,13 @@ class Users extends Model
         'email',
         'email_verified_at',
         'password',
-        'remember_token'
+        'remember_token',
+        'id_role'
     ];
     protected $hidden = [
         'password',
         'remember_token',
+        'id_role'
     ];
     protected $casts = [
         'email_verified_at' => 'datetime',

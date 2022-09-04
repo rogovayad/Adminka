@@ -1,5 +1,6 @@
 <?php
 
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Models\Roles;
 use App\Http\Controllers\AddressController;
@@ -25,7 +26,9 @@ Route::resource('address', AddressController::class);
 
 Route::view('/user','user',['name'=>'GeoAS']);
 
-Route::view('/login','login',['name'=>'GeoAS']);
+//Route::view('/login','login',['name'=>'GeoAS']);
+
+Route::view('/login','login');
 
 Route::view('/about','about',['name'=>'GeoAS']);
 
@@ -35,3 +38,7 @@ Route::get('/roles/{id}', function (int $id) {
     return $role;
 });
 
+
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

@@ -4,7 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Address;
-use View;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\View;
 
 class AddressController extends Controller
 {
@@ -27,6 +28,8 @@ class AddressController extends Controller
      */
     public function create()
     {
+        if (Auth::user()->cannot('create',Address::class))
+            Abort(403);
         return view('address.create');
     }
 
@@ -58,7 +61,7 @@ class AddressController extends Controller
         ]);
 
         Address::create($request->all());
-        return redirect()->route('address.index')->with('success','Post created successfully.');
+        return redirect()->route('address.index')->with('success','address created successfully.');
     }
 
     /**
@@ -81,6 +84,8 @@ class AddressController extends Controller
      */
     public function edit(Address $address)
     {
+        if (Auth::user()->cannot('update',Address::class))
+            Abort(403);
         return view('address.edit',compact('address'));
     }
 
@@ -93,6 +98,8 @@ class AddressController extends Controller
      */
     public function update(Request $request, Address $address)
     {
+        if (Auth::user()->cannot('update',Address::class))
+            Abort(403);
         $request->validate([
             'id_address_eas'=>'required',
             'id_building_eas'=>'required',
@@ -124,10 +131,12 @@ class AddressController extends Controller
      */
     public function destroy(Address $id_address_eas)
     {
+        if (Auth::user()->cannot('delete',Address::class))
+            Abort(403);
         $address = address::find($id_address_eas);
         $address->delete();
         // redirect
         return redirect()->route('address.index')
-            ->with('success','post deleted successfully');
+            ->with('success','address deleted successfully');
     }
 }

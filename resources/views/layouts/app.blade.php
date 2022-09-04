@@ -12,7 +12,13 @@
     <h1 class="display-5 fw-bold">Adminka 1.0: GeoAS ></h1>
     <div class="col-lg-6 mx-auto">
     </div>
+    <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+        {{ __('Logout') }}
+    </a>
+    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+        @csrf
+    </form>
 </div>
-@yield('main')
+@yield('content')
 </body>
 </html>

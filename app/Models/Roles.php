@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Roles extends Model
 {
+    const ADMIN = '1';
     use HasFactory;
     protected $table = 'public.roles';
     protected $primaryKey = 'id';

@@ -60,7 +60,8 @@ class AddressController extends Controller
             'id_user'=>'required',
         ]);
 
-        Address::create($request->all());
+        //Address::create($request->all());
+        Address::create($request->validated());
         return redirect()->route('address.index')->with('success','address created successfully.');
     }
 
@@ -119,8 +120,9 @@ class AddressController extends Controller
             'id_user'=>'required',
         ]);
 
-        $address->update($request->all());
-        return redirect()->route('address.index')->with('success','Post updated successfully');
+        //$address->update($request->all());
+        $address->update($request->validated());
+        return redirect()->route('address.index')->with('success','Address updated successfully');
     }
 
     /**
@@ -133,7 +135,7 @@ class AddressController extends Controller
     {
         if (Auth::user()->cannot('delete',Address::class))
             Abort(403);
-        $address = address::find($id_address_eas);
+        $address = Address::find($id_address_eas);
         $address->delete();
         // redirect
         return redirect()->route('address.index')

@@ -5,6 +5,7 @@ namespace App\Policies;
 use App\Models\Address;
 use App\Models\Users;
 use App\Models\User;
+use App\Models\Roles;
 use Illuminate\Auth\Access\HandlesAuthorization;
 use Illuminate\Support\Facades\Auth;
 
@@ -43,7 +44,8 @@ class AddressPolicy
      */
     public function create(User $user)
     {
-        return $user->id_role=='1';
+        //return $user->id_role=='1';
+        return $user->id_role==Roles::ADMIN;
     }
 
     /**
@@ -55,11 +57,12 @@ class AddressPolicy
      */
     public function update(User $user)
     {
-        return $user->id_role=='1';
+        //return $user->id_role=='1';
+        return $user->id_role==Roles::ADMIN;
     }
 
     /**
-     * Determine whether the user can delete the model.
+     * Determine whether the user can delRoles::ADMIN;ete the model.
      *
      * @param  \App\Models\User  $user
      * @param  \App\Models\Address  $address
@@ -67,7 +70,8 @@ class AddressPolicy
      */
     public function delete(User $user)
     {
-        return $user->id_role==1;
+        //return $user->id_role==1;
+        return $user->id_role==Roles::ADMIN;
     }
 
     /**
@@ -79,7 +83,8 @@ class AddressPolicy
      */
     public function restore(User $user)
     {
-        return $user->id_role==1;
+        //return $user->id_role==1;
+        return $user->id_role==Roles::ADMIN;
     }
 
     /**
@@ -91,6 +96,7 @@ class AddressPolicy
      */
     public function forceDelete(User $user)
     {
-        return $user->id_role==1;
+        //return $user->id_role==1;
+        return $user->id_role==Roles::ADMIN;
     }
 }

@@ -32,7 +32,7 @@ class AddressFactory extends Factory
             'build_number'=>'',
             'paddress'=>'г.Санкт-Петербург, проспект Просвещения, дом 20/25, литера Б',
             'base_address_flag'=>'Y',
-            'id_user'=>1
+            'id_user'=>2
         ];
     }
 }

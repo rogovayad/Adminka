@@ -14,7 +14,7 @@ return new class extends Migration
     public function up()
     {
         Schema::table('geonim', function (Blueprint $table) {
-            $table->foreign('type')->references('id')->on('tgeonim');
+           // $table->foreign('type')->references('id')->on('tgeonim');
 
         });
     }

@@ -38,6 +38,12 @@ Route::get('/roles/{id}', function (int $id) {
     return $role;
 });
 
+/*Route::get('/store', function () {
+    return redirect()->route('address.create');
+})->name('create');*/
+
+Route::get('profile', function () {
+})->middleware('auth');
 
 Auth::routes();
 

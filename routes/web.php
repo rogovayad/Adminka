@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Models\Roles;
 use App\Http\Controllers\AddressController;
+use Illuminate\Support\Facades\Log;
 
 /*
 |--------------------------------------------------------------------------
@@ -41,6 +42,12 @@ Route::get('/roles/{id}', function (int $id) {
 /*Route::get('/store', function () {
     return redirect()->route('address.create');
 })->name('create');*/
+
+Route::get('/log', function () {
+    Log::channel('slack')->info('An informational message.');
+    return 'ok';
+});
+
 
 Route::get('profile', function () {
 })->middleware('auth');

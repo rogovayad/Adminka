@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Models\Roles;
 use App\Http\Controllers\AddressController;
 use Illuminate\Support\Facades\Log;
+use \App\Http\Middleware\EnRu;
 
 /*
 |--------------------------------------------------------------------------
@@ -49,8 +50,13 @@ Route::get('/log', function () {
 });
 
 
-Route::get('profile', function () {
-})->middleware('auth');
+/*Route::get('/', [AddressController::class,'show'])
+    ->name('address.show')
+    ->middleware('EnRu');*/
+
+Route::get('/{locale}/address', [AddressController::class,'show'])
+    ->name('address.show')
+    ->middleware('EnRu');
 
 Auth::routes();
 

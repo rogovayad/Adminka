@@ -20,12 +20,12 @@ class BuildingsFactory extends Factory
     public function definition()
     {
         return [
-            'id_address_eas'=>1,
+            'id_address_eas'=>2,
             'base_quarter_code'=>'5505',
             'ground_area_code'=>18,
             'building_code'=>1,
             'prim_code'=>10,
-            'id_user'=>1
+            'id_user'=>2
         ];
     }
 }

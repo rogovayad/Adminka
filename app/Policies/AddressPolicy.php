@@ -16,10 +16,10 @@ class AddressPolicy
     /**
      * Determine whether the user can view any models.
      *
-     * @param  \App\Models\Users  $user
+     * @param  \App\Models\User  $user
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function viewAny(Users $user)
+    public function viewAny(User $user)
     {
         return true;
     }
@@ -27,11 +27,11 @@ class AddressPolicy
     /**
      * Determine whether the user can view the model.
      *
-     * @param  \App\Models\Users  $user
+     * @param  \App\Models\User  $user
      * @param  \App\Models\Address  $address
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function view(Users $user, Address $address)
+    public function view(User $user, Address $address)
     {
         return true;
     }
@@ -44,7 +44,6 @@ class AddressPolicy
      */
     public function create(User $user)
     {
-        //return $user->id_role=='1';
         return $user->id_role==Roles::ADMIN;
     }
 
@@ -57,7 +56,6 @@ class AddressPolicy
      */
     public function update(User $user)
     {
-        //return $user->id_role=='1';
         return $user->id_role==Roles::ADMIN;
     }
 
@@ -70,7 +68,6 @@ class AddressPolicy
      */
     public function delete(User $user)
     {
-        //return $user->id_role==1;
         return $user->id_role==Roles::ADMIN;
     }
 
@@ -83,7 +80,6 @@ class AddressPolicy
      */
     public function restore(User $user)
     {
-        //return $user->id_role==1;
         return $user->id_role==Roles::ADMIN;
     }
 
@@ -96,7 +92,6 @@ class AddressPolicy
      */
     public function forceDelete(User $user)
     {
-        //return $user->id_role==1;
         return $user->id_role==Roles::ADMIN;
     }
 }

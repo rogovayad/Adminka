@@ -25,6 +25,7 @@ class UsersFactory extends Factory
             'email_verified_at' => now(),
             'password' => '123',
             'remember_token' => Str::random(10),
+            'id_role'=>1,
         ];
     }
 }

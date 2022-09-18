@@ -18,11 +18,10 @@ class BpropertiesFactory extends Factory
     public function definition()
     {
         return [
-            'id'=>1,
             'id_building_eas'=>2,
             'id_properties'=>1,
             'name'=>'195297',
-            'id_user'=>1
+            'id_user'=>2
         ];
     }
 }

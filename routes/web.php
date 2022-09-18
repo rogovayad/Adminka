@@ -44,7 +44,7 @@ Route::get('/roles/{id}', function (int $id) {
 })->name('create');*/
 
 Route::get('/log', function () {
-    Log::channel('slack')->info('An informational message.');
+    Log::channel('slack')->critical('An informational message.');
     return 'ok';
 });
 

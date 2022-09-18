@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Address;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\View;
+use Illuminate\Support\Facades\Log;
 
 class AddressController extends Controller
 {
@@ -85,8 +86,10 @@ class AddressController extends Controller
      */
     public function edit(Address $address)
     {
-        if (Auth::user()->cannot('update',Address::class))
+        if (Auth::user()->cannot('update',Address::class)) {
+            Log::channel('slack')->error('You cant edit!');
             Abort(403);
+        }
         return view('address.edit',compact('address'));
     }
 

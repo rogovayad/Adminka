@@ -55,7 +55,7 @@ Route::get('profile', function () {
 
 Route::get('/{locale}/address', [AddressController::class,'show'])
     ->name('address.show')
-    ->middleware('SetLocale');
+    ->middleware('setLocale');
 
 Auth::routes();
 

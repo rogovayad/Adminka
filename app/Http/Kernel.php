@@ -3,7 +3,7 @@
 namespace App\Http;
 
 use Illuminate\Foundation\Http\Kernel as HttpKernel;
-use \App\Http\Middleware\EnRu;
+use \App\Http\Middleware\SetLocale;
 
 class Kernel extends HttpKernel
 {
@@ -64,6 +64,6 @@ class Kernel extends HttpKernel
         'signed' => \Illuminate\Routing\Middleware\ValidateSignature::class,
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
         'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
-        'EnRu'=>\App\Http\Middleware\EnRu::class,
+        'SetLocale'=>\App\Http\Middleware\SetLocale::class,
     ];
 }

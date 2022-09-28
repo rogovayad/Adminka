@@ -4,8 +4,15 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Models\Roles;
 use App\Http\Controllers\AddressController;
+use App\Models\Address;
 use Illuminate\Support\Facades\Log;
 use \App\Http\Middleware\SetLocale;
+use Illuminate\Support\Facades\Redis;
+use Illuminate\Http\Request;
+use Illuminate\Contracts\Cache\Repository;
+use Illuminate\Contracts\Cache\Factory;
+use Illuminate\Support\Facades\Cache;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -49,6 +56,10 @@ Route::get('/log', function () {
     return 'ok';
 });
 
+Route::get('/inf', function () {
+    phpinfo();
+});
+
 Route::get('profile', function () {
 })->middleware('auth');
 
@@ -60,3 +71,34 @@ Route::get('/{locale}/address', [AddressController::class,'show'])
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+Route::get('/address_created/{id_address_eas}', function(Request $request,$id_address_eas){
+    $b=Cache::tags('address')->remember(Address::created($request->input('id_address_eas',$id_address_eas)),600, function() use ($request, $id_address_eas) {
+        return Address::find($request->input('id_address_eas',$id_address_eas));
+    });
+    dump($b);
+    return 'ok';
+});
+
+Route::get('/address_updated/{id_address_eas}/{field}/{val}', function(Request $request, $id_address_eas, $field, $val){
+    $b=Cache::tags('address')->remember(Address::updated($request->input('id_address_eas',3)),600, function() use ($request, $id_address_eas, $field, $val) {
+        $address=Address::find($request->input('id_address_eas',$id_address_eas));
+        Address::whereId_address_eas($id_address_eas)->update([
+            $field=>$val
+        ]);
+        $address->save();
+    });
+    return 'ok';
+});
+
+Route::get('/address_deleted/{id_address_eas}', function(Request $request,$id_address_eas){
+    $b=Cache::tags('address')->remember(Address::deleted($request->input('id_address_eas',$id_address_eas)),600, function() use ($request, $id_address_eas) {
+        return Address::find($request->input('id_address_eas',$id_address_eas));
+    });
+    return 'ok';
+});
+
+Route::get('/address_flush', function(Request $request){
+    Cache::tags('address') -> flush();
+    return 'ok';
+});

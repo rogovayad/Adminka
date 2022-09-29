@@ -64,9 +64,9 @@ Route::get('profile', function () {
 })->middleware('auth');
 
 
-Route::get('/{locale}/address', [AddressController::class,'show'])
-    ->name('address.show')
-    ->middleware('setLocale');
+//Route::get('/{locale}/address', [AddressController::class,'show'])
+ //   ->name('address.show')
+  //  ->middleware('setLocale');
 
 Auth::routes();
 
@@ -80,8 +80,8 @@ Route::get('/address_created/{id_address_eas}', function(Request $request,$id_ad
     return 'ok';
 });
 
-Route::get('/address_updated/{id_address_eas}/{field}/{val}', function(Request $request, $id_address_eas, $field, $val){
-    $b=Cache::tags('address')->remember(Address::updated($request->input('id_address_eas',3)),600, function() use ($request, $id_address_eas, $field, $val) {
+/*Route::get('/address_updated/{id_address_eas}/{field}/{val}', function(Request $request, $id_address_eas, $field, $val){
+    $b=Cache::tags('address')->remember(Address::updated($request->input('id_address_eas',$id_address_eas)),600, function() use ($request, $id_address_eas, $field, $val) {
         $address=Address::find($request->input('id_address_eas',$id_address_eas));
         Address::whereId_address_eas($id_address_eas)->update([
             $field=>$val
@@ -101,4 +101,4 @@ Route::get('/address_deleted/{id_address_eas}', function(Request $request,$id_ad
 Route::get('/address_flush', function(Request $request){
     Cache::tags('address') -> flush();
     return 'ok';
-});
+});*/

@@ -7,19 +7,27 @@ use App\Models\Address;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Cache;
 
 class AddressController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
+     * @param $address
      * @return \Illuminate\Http\Response
      */
     public function index()
     {
-        $address = Address::all();
-        return view::make('address.index')->with('address', $address);
-
+        $addr=Address::getCachedAll();
+        $address=Cache::store('memcached')->get('address',Address::all());
+        if (!is_null($address)){
+            return view::make('address.index')->with('address', $address);
+        }
+        else {
+            $address = Address::all();
+            return view::make('address.index')->with('address', $address);
+        }
     }
 
     /**
@@ -61,8 +69,8 @@ class AddressController extends Controller
             'id_user'=>'required',
         ]);
 
-        //Address::create($request->all());
-        Address::create($request->validated());
+        Address::create($request->all());
+        //Address::create($request->validated());
         return redirect()->route('address.index')->with('success','address created successfully.');
     }
 
@@ -87,7 +95,7 @@ class AddressController extends Controller
     public function edit(Address $address)
     {
         if (Auth::user()->cannot('update',Address::class)) {
-            Log::channel('slack')->error('You cant edit!');
+       //     Log::channel('slack')->error('You cant edit!');
             Abort(403);
         }
         return view('address.edit',compact('address'));

@@ -20,14 +20,7 @@ class AddressController extends Controller
     public function index()
     {
         $address=Address::getCachedAll();
-        //$address=Cache::store('memcached')->get('address',Address::all());
-        if (!is_null($address)){
-            return view::make('address.index')->with('address', $address);
-        }
-        else {
-            $address = Address::all();
-            return view::make('address.index')->with('address', $address);
-        }
+        return view::make('address.index')->with('address', $address);
     }
 
     /**

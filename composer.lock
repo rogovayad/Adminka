@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "479662bc711ee4648ec11f5b4b4bff57",
+    "content-hash": "c483d386f91d6a8e21c9f9e8f0d6ff76",
     "packages": [
         {
             "name": "arcanedev/log-viewer",
@@ -3088,6 +3088,42 @@
                 }
             ],
             "time": "2022-08-05T17:58:37+00:00"
+        },
+        {
+            "name": "rogovaya_d/lara_ascii",
+            "version": "dev-master",
+            "dist": {
+                "type": "path",
+                "url": "../lara_ascii",
+                "reference": "95f896c1f1b8bc6e74901cba1c8fa78ded5a65fd"
+            },
+            "require": {
+                "illuminate/support": "^9.19"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "\\Rogovaya_d\\LaraAscii\\ServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Rogovaya_d\\LaraAscii\\": "src/"
+                }
+            },
+            "authors": [
+                {
+                    "name": "d.rogovaya",
+                    "email": "rogovaya_d@iac.spb.ru"
+                }
+            ],
+            "description": "It converts to ascii symbols",
+            "transport-options": {
+                "symlink": true,
+                "relative": true
+            }
         },
         {
             "name": "symfony/console",
@@ -8498,7 +8534,9 @@
     ],
     "aliases": [],
     "minimum-stability": "dev",
-    "stability-flags": [],
+    "stability-flags": {
+        "rogovaya_d/lara_ascii": 20
+    },
     "prefer-stable": true,
     "prefer-lowest": false,
     "platform": {

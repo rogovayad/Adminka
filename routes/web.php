@@ -12,6 +12,7 @@ use Illuminate\Http\Request;
 use Illuminate\Contracts\Cache\Repository;
 use Illuminate\Contracts\Cache\Factory;
 use Illuminate\Support\Facades\Cache;
+use App\Console\Commands\ChangeAddress;
 
 
 /*
@@ -78,6 +79,12 @@ Route::get('/address_created/{id_address_eas}', function(Request $request,$id_ad
     });
     dump($b);
     return 'ok';
+});
+
+Route::get('/upd_liter', function () {
+    $exitCode = Artisan::call('change:address', [
+        'id_address_eas' => 3, 'liter'=>'Б','--name' => 'default'
+    ]);
 });
 
 /*Route::get('/address_updated/{id_address_eas}/{field}/{val}', function(Request $request, $id_address_eas, $field, $val){

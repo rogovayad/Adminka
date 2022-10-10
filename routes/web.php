@@ -13,6 +13,8 @@ use Illuminate\Contracts\Cache\Repository;
 use Illuminate\Contracts\Cache\Factory;
 use Illuminate\Support\Facades\Cache;
 use App\Console\Commands\ChangeAddress;
+use App\Services\CalcAddresses;
+use App\Jobs\ProcAddr;
 
 
 /*
@@ -85,6 +87,19 @@ Route::get('/upd_liter', function () {
     $exitCode = Artisan::call('change:address', [
         'id_address_eas' => 3, 'liter'=>'Б','--name' => 'default'
     ]);
+});
+
+/*Route::get('/calc', function (CalcAddresses $addresses) {
+    $idaddresses=collect(Address::all());
+    $res=$addresses->calc($idaddresses);
+    return $res;
+});*/
+
+Route::get('/calc', function (CalcAddresses $addresses) {
+    $idaddresses=Address::all()->map->id_address_eas->toArray();
+    $job=new ProcAddr($idaddresses);
+    dispatch($job);
+    return 'ok';
 });
 
 /*Route::get('/address_updated/{id_address_eas}/{field}/{val}', function(Request $request, $id_address_eas, $field, $val){

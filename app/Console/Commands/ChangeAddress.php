@@ -26,10 +26,6 @@ class ChangeAddress extends Command
      *
      * @return int
      */
-    private function getAddress():Address
-    {
-        return app(Address::class);
-    }
 
     protected function getArguments()
     {
@@ -53,6 +49,7 @@ class ChangeAddress extends Command
         $address=Address::find($id_address_eas);
         Address::whereId_address_eas($id_address_eas)->update(['liter'=>$liter]);
         $address->save();
+        $this->line('Liter updated!');
         return 'ok';
     }
 

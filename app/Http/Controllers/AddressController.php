@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Cache;
+use App\Events\AddressViewEvent;
 
 class AddressController extends Controller
 {
@@ -105,7 +106,7 @@ class AddressController extends Controller
     {
         if (Auth::user()->cannot('update',Address::class))
             Abort(403);
-        $request->validate([
+        /*$request->validate([
             'id_address_eas'=>'required',
             'id_building_eas'=>'required',
             'id_raion'=>'required',
@@ -122,10 +123,11 @@ class AddressController extends Controller
             'paddress'=>'required',
             'base_address_flag'=>'required',
             'id_user'=>'required',
-        ]);
+        ]);*/
 
-        //$address->update($request->all());
-        $address->update($request->validated());
+        $address->update($request->all());
+        //$address->update($request->validated());
+        event(new AddressViewEvent($address));
         return redirect()->route('address.index')->with('success','Address updated successfully');
     }
 

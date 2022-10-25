@@ -88,10 +88,10 @@ class AddressController extends Controller
      */
     public function edit(Address $address)
     {
-      //  if (Auth::user()->cannot('update',Address::class)) {
+        if (Auth::user()->cannot('update',Address::class)) {
        //     Log::channel('slack')->error('You cant edit!');
-         //   Abort(403);
-       // }
+            Abort(403);
+        }
         return view('address.edit',compact('address'));
     }
 
@@ -104,8 +104,8 @@ class AddressController extends Controller
      */
     public function update(Request $request, Address $address)
     {
-      //  if (Auth::user()->cannot('update',Address::class))
-        //    Abort(403);
+        if (Auth::user()->cannot('update',Address::class))
+            Abort(403);
         /*$request->validate([
             'id_address_eas'=>'required',
             'id_building_eas'=>'required',

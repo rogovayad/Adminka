@@ -30,6 +30,7 @@ class EventServiceProvider extends ServiceProvider
      */
     public function boot()
     {
+
         parent::boot();
         app('events')->listen('AddressViewEvent', 'App\Listeners\AddressActionsListener');
     }

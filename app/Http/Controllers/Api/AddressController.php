@@ -30,24 +30,24 @@ class AddressController extends ApiController
      */
     public function store(Request $request)
     {
-        $address = Validator::make($request->all(), [
-            'id_address_eas' => 'required',
-            'id_building_eas' => 'required',
-            'id_raion'=> 'required',
-            'id_okrug'=> 'required',
-            'id_prefiks'=> 'required',
-            'id_geonim'=> 'required',
-            'paddress' => 'required',
-            'base_address_flag'=> 'required',
-            'id_user'=> 'required',
-        ]);
-
-        if ($address->fails()) {
-            return $this->errorResponse('Error validation.', $address->errors());
-        }
+        $address=$this->validate($request, [
+            'id_address_eas'=>'required',
+            'id_building_eas'=>'required',
+            'id_raion'=>'required',
+            'id_okrug'=>'required',
+            'id_prefiks'=>'required',
+            'id_geonim'=>'required',
+            'paddress'=>'required',
+            'base_address_flag'=>'required',
+            'id_user'=>'required',
+        ],
+        [
+            'required'=>'The :attribute field is required.'
+        ],
+          );
 
         return $this->successResponse('Address successfully created.', new AddressResource(
-            Address::create($address->validated())
+            Address::create($request->all())
         ));
     }
 
@@ -88,19 +88,10 @@ class AddressController extends ApiController
         }
 
        $input = $addresses->validated();
+       $address->update($input);
+       $address->save();
 
-        $address->id_address_eas = $input['id_address_eas'];
-        $address->id_building_eas = $input['id_building_eas'];
-        $address->id_raion = $input['id_raion'];
-        $address->id_okrug = $input['id_okrug'];
-        $address->id_prefiks = $input['id_prefiks'];
-        $address->id_geonim = $input['id_geonim'];
-        $address->paddress = $input['paddress'];
-        $address->base_address_flag = $input['base_address_flag'];
-        $address->id_user = $input['id_user'];
-        $address->save();
-
-        return $this->successResponse('Address successfully updated.', new AddressResource($address));
+       return $this->successResponse('Address successfully updated.', new AddressResource($address));
 
     }
 

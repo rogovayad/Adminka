@@ -18,6 +18,9 @@ class EventServiceProvider extends ServiceProvider
         Registered::class => [
             SendEmailVerificationNotification::class,
         ],
+        App\Events\AddressViewEvent::class => [
+            App\Listeners\AddressActionsListener::class,
+        ],
     ];
 
     /**
@@ -27,7 +30,9 @@ class EventServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //
+
+        parent::boot();
+        app('events')->listen('AddressViewEvent', 'App\Listeners\AddressActionsListener');
     }
 
     /**
@@ -37,6 +42,6 @@ class EventServiceProvider extends ServiceProvider
      */
     public function shouldDiscoverEvents()
     {
-        return false;
+        return true;
     }
 }

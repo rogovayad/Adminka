@@ -7,19 +7,21 @@ use App\Models\Address;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Cache;
+use App\Events\AddressViewEvent;
 
 class AddressController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
+     * @param $address
      * @return \Illuminate\Http\Response
      */
     public function index()
     {
-        $address = Address::all();
+        $address=Address::getCachedAll();
         return view::make('address.index')->with('address', $address);
-
     }
 
     /**
@@ -61,8 +63,8 @@ class AddressController extends Controller
             'id_user'=>'required',
         ]);
 
-        //Address::create($request->all());
-        Address::create($request->validated());
+        Address::create($request->all());
+        //Address::create($request->validated());
         return redirect()->route('address.index')->with('success','address created successfully.');
     }
 
@@ -87,7 +89,7 @@ class AddressController extends Controller
     public function edit(Address $address)
     {
         if (Auth::user()->cannot('update',Address::class)) {
-            Log::channel('slack')->error('You cant edit!');
+       //     Log::channel('slack')->error('You cant edit!');
             Abort(403);
         }
         return view('address.edit',compact('address'));
@@ -104,7 +106,7 @@ class AddressController extends Controller
     {
         if (Auth::user()->cannot('update',Address::class))
             Abort(403);
-        $request->validate([
+        /*$request->validate([
             'id_address_eas'=>'required',
             'id_building_eas'=>'required',
             'id_raion'=>'required',
@@ -121,10 +123,11 @@ class AddressController extends Controller
             'paddress'=>'required',
             'base_address_flag'=>'required',
             'id_user'=>'required',
-        ]);
+        ]);*/
 
-        //$address->update($request->all());
-        $address->update($request->validated());
+        $address->update($request->all());
+        //$address->update($request->validated());
+        event(new AddressViewEvent($address));
         return redirect()->route('address.index')->with('success','Address updated successfully');
     }
 

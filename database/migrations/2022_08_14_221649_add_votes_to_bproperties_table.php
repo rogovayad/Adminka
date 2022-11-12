@@ -15,9 +15,9 @@ return new class extends Migration
     {
         Schema::table('bproperties', function (Blueprint $table) {
             $table->index('id_building_eas', 'idbldp_index');
-           // $table->foreign('id_user')->references('id')->on('users');
-           // $table->foreign('id_building_eas')->references('id_building_eas')->on('buildings');
-           // $table->foreign('id_properties')->references('id')->on('properties');
+            $table->foreign('id_user')->references('id')->on('users');
+            $table->foreign('id_building_eas')->references('id_building_eas')->on('buildings');
+            $table->foreign('id_properties')->references('id')->on('properties');
         });
     }
 
@@ -29,7 +29,10 @@ return new class extends Migration
     public function down()
     {
         Schema::table('bproperties', function (Blueprint $table) {
-            //
+            $table->dropIndex('idbldp_index');
+            $table->dropForeign(['id_user']);
+            $table->dropForeign(['id_building_eas']);
+            $table->dropForeign(['id_properties']);
         });
     }
 };

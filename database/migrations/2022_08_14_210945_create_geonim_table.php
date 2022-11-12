@@ -16,8 +16,8 @@ return new class extends Migration
         Schema::create('geonim', function (Blueprint $table) {
 
             $table->increments('id');
-    $table->integer('type');
-    $table->string('name');
+            $table->integer('type');
+            $table->string('name');
             $table->timestamps();
         });
     }

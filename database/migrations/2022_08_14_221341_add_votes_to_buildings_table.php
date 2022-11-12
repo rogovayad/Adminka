@@ -15,8 +15,7 @@ return new class extends Migration
     {
         Schema::table('buildings', function (Blueprint $table) {
             $table->index('id_address_eas', 'idaddr_index');
-           // $table->foreign('id_user')->references('id')->on('users');
-            //$table->foreign('id_address_eas')->references('id_address_eas')->on('address');
+            $table->foreign('id_user')->references('id')->on('users');
         });
     }
 
@@ -28,7 +27,8 @@ return new class extends Migration
     public function down()
     {
         Schema::table('buildings', function (Blueprint $table) {
-            //
+            $table->dropIndex('idaddr_index');
+            $table->dropForeign(['id_user']);
         });
     }
 };

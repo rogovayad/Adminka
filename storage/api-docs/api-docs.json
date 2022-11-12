@@ -1,0 +1,349 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "Adminka",
+        "description": "Adminka",
+        "version": "1.0.0"
+    },
+    "paths": {
+        "/address": {
+            "get": {
+                "description": "Address",
+                "responses": {
+                    "default": {
+                        "description": "Address"
+                    }
+                }
+            }
+        },
+        "/api/address": {
+            "get": {
+                "tags": [
+                    "api/address"
+                ],
+                "summary": "Функция получения адресов",
+                "description": "Функция получения адресов",
+                "operationId": "index",
+                "responses": {
+                    "200": {
+                        "description": "Successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "result": {
+                                            "type": "boolean"
+                                        },
+                                        "fields": {
+                                            "type": "array",
+                                            "items": {
+                                                "type": "string",
+                                                "example": "id"
+                                            }
+                                        },
+                                        "outfields": {
+                                            "properties": {
+                                                "id_address_eas": {
+                                                    "type": "string",
+                                                    "example": "код адреса"
+                                                },
+                                                "id_building_eas": {
+                                                    "type": "string",
+                                                    "example": "код строения"
+                                                },
+                                                "id_raion": {
+                                                    "type": "string",
+                                                    "example": "код района"
+                                                },
+                                                "id_okrug": {
+                                                    "type": "string",
+                                                    "example": "код округа"
+                                                },
+                                                "id_prefiks": {
+                                                    "type": "string",
+                                                    "example": "код префикса"
+                                                },
+                                                "id_geonim": {
+                                                    "type": "string",
+                                                    "example": "код геонима"
+                                                },
+                                                "paddress": {
+                                                    "type": "string",
+                                                    "example": "адрес"
+                                                },
+                                                "base_address_flag": {
+                                                    "type": "string",
+                                                    "example": "признак основного адреса"
+                                                },
+                                                "id_user": {
+                                                    "type": "string",
+                                                    "example": "код пользователя"
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "api/address"
+                ],
+                "summary": "Функция создания адреса",
+                "description": "Функция создания адреса",
+                "operationId": "store",
+                "responses": {
+                    "200": {
+                        "description": "Successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "result": {
+                                            "type": "boolean"
+                                        },
+                                        "fields": {
+                                            "type": "array",
+                                            "items": {
+                                                "type": "string",
+                                                "example": "id"
+                                            }
+                                        },
+                                        "outfields": {
+                                            "properties": {
+                                                "id_address_eas": {
+                                                    "type": "string",
+                                                    "example": "код адреса"
+                                                },
+                                                "id_building_eas": {
+                                                    "type": "string",
+                                                    "example": "код строения"
+                                                },
+                                                "id_raion": {
+                                                    "type": "string",
+                                                    "example": "код района"
+                                                },
+                                                "id_okrug": {
+                                                    "type": "string",
+                                                    "example": "код округа"
+                                                },
+                                                "id_prefiks": {
+                                                    "type": "string",
+                                                    "example": "код префикса"
+                                                },
+                                                "id_geonim": {
+                                                    "type": "string",
+                                                    "example": "код геонима"
+                                                },
+                                                "paddress": {
+                                                    "type": "string",
+                                                    "example": "адрес"
+                                                },
+                                                "base_address_flag": {
+                                                    "type": "string",
+                                                    "example": "признак основного адреса"
+                                                },
+                                                "id_user": {
+                                                    "type": "string",
+                                                    "example": "код пользователя"
+                                                }
+                                            },
+                                            "type": "object"
+                                        },
+                                        "editfields": {
+                                            "type": "array",
+                                            "items": {
+                                                "properties": {
+                                                    "paddress": {
+                                                        "type": "string",
+                                                        "example": "Невский проспект"
+                                                    },
+                                                    "type": {
+                                                        "type": "string",
+                                                        "example": "input"
+                                                    },
+                                                    "label": {
+                                                        "type": "string",
+                                                        "example": "Адрес"
+                                                    }
+                                                },
+                                                "type": "object"
+                                            }
+                                        },
+                                        "data": {
+                                            "properties": {
+                                                "data": {
+                                                    "type": "array",
+                                                    "items": {}
+                                                }
+                                            },
+                                            "type": "object"
+                                        },
+                                        "message": {
+                                            "type": "string"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Bad Request"
+                    }
+                }
+            }
+        },
+        "/api/address/{id_address_eas}": {
+            "put": {
+                "tags": [
+                    "api/address/{id_address_eas}"
+                ],
+                "summary": "Функция обновления адреса по id_address_eas",
+                "description": "Функция обновления адреса по id_address_eas",
+                "operationId": "update",
+                "parameters": [
+                    {
+                        "name": "id_address_eas",
+                        "in": "path",
+                        "description": "Код адреса",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        },
+                        "example": "1"
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "id_building_eas": {
+                                        "description": "код строения",
+                                        "type": "integer",
+                                        "example": "2"
+                                    },
+                                    "id_raion": {
+                                        "description": "код района",
+                                        "type": "integer",
+                                        "example": "2"
+                                    },
+                                    "id_okrug": {
+                                        "description": "код округа",
+                                        "type": "integer",
+                                        "example": "2"
+                                    },
+                                    "id_prefiks": {
+                                        "description": "код префикса",
+                                        "type": "integer",
+                                        "example": "2"
+                                    },
+                                    "id_geonim": {
+                                        "description": "код геонима",
+                                        "type": "integer",
+                                        "example": "2"
+                                    },
+                                    "id_user": {
+                                        "description": "код пользователя",
+                                        "type": "integer",
+                                        "example": "2"
+                                    },
+                                    "base_address_flag": {
+                                        "description": "признак основного адреса",
+                                        "type": "integer",
+                                        "example": "2"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "result": {
+                                            "type": "boolean",
+                                            "example": "true"
+                                        },
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Данные успешно обновлены"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Bad Request"
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "api/address/{id_address_eas}"
+                ],
+                "summary": "Функция удаления записи из справочника адресов по id_address_eas",
+                "description": "Функция удаления записи из справочника адресов по id_address_eas",
+                "operationId": "destroy",
+                "parameters": [
+                    {
+                        "name": "id_address_eas",
+                        "in": "path",
+                        "description": "Код адреса",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        },
+                        "example": "1"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "result": {
+                                            "type": "boolean",
+                                            "example": "true"
+                                        },
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Данные успешно удалены"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Bad Request"
+                    }
+                }
+            }
+        }
+    },
+    "components": {
+        "responses": {
+            "500": {
+                "description": "Bad Request"
+            }
+        }
+    }
+}

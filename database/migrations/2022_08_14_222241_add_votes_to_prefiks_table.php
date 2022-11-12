@@ -14,8 +14,8 @@ return new class extends Migration
     public function up()
     {
         Schema::table('prefiks', function (Blueprint $table) {
-           // $table->foreign('id_geonim')->references('id')->on('geonim');
-           // $table->foreign('id_town')->references('id')->on('town');
+            $table->foreign('id_geonim')->references('id')->on('geonim');
+            $table->foreign('id_town')->references('id')->on('town');
 
         });
     }
@@ -28,7 +28,8 @@ return new class extends Migration
     public function down()
     {
         Schema::table('prefiks', function (Blueprint $table) {
-            //
+            $table->dropForeign(['id_geonim']);
+            $table->dropForeign(['id_town']);
         });
     }
 };

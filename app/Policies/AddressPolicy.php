@@ -56,7 +56,8 @@ class AddressPolicy
      */
     public function update(User $user)
     {
-        return $user->id_role==Roles::ADMIN;
+        if (($user->id_role==Roles::ADMIN) || ($user->id_role==Roles::USE))
+            return true;
     }
 
     /**

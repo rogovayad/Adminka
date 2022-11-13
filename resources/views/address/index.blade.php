@@ -8,7 +8,11 @@
             </div>
         </div>
     </div>
-
+<br>
+    @if (session()->has('alertType'))
+        <div class="alert alert-{{session('alertType')}}">{{session('alertText')}}</div>
+    @endif
+<br>
     @if ($message = Session::get('success'))
         <div class="alert alert-success">
             <p>{{ $message }}</p>
@@ -60,13 +64,5 @@
     <br>
     <a class="btn btn-primary" href="{{ route('address.edit',$addresses->id_address_eas) }}">Edit</a>
     <br>
-    <form action="{{ route('address.destroy',$addresses->id_address_eas) }}" method="POST">
-
-        @csrf
-        @method('DELETE')
-        <button type="submit" class="btn btn-danger">Delete</button>
-    </form>
-
-
-
+    <a class="btn btn-primary" href="{{ route('address.create') }}">Create</a>
 @endsection

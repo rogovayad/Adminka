@@ -160,6 +160,41 @@ class AddressController extends ApiController
      *                     example="код геонима"
      *                 ),
      *         @OA\Property(
+     *                     property="house",
+     *                     type="string",
+     *                     example="номер дома"
+     *                 ),
+     *         @OA\Property(
+     *                     property="corpus",
+     *                     type="string",
+     *                     example="корпус"
+     *                 ),
+     *         @OA\Property(
+     *                     property="liter",
+     *                     type="string",
+     *                     example="литера"
+     *                 ),
+     *         @OA\Property(
+     *                     property="villa",
+     *                     type="string",
+     *                     example="номер дачи"
+     *                 ),
+     *         @OA\Property(
+     *                     property="parcel",
+     *                     type="string",
+     *                     example="номер участка"
+     *                 ),
+     *         @OA\Property(
+     *                     property="construction",
+     *                     type="string",
+     *                     example="сооружение"
+     *                 ),
+     *         @OA\Property(
+     *                     property="build_number",
+     *                     type="string",
+     *                     example="номер строения"
+     *                 ),
+     *         @OA\Property(
      *                     property="paddress",
      *                     type="string",
      *                     example="адрес"
@@ -212,6 +247,13 @@ class AddressController extends ApiController
             'id_okrug'=>'required',
             'id_prefiks'=>'required',
             'id_geonim'=>'required',
+            'house'=>'nullable|string',
+            'corpus'=>'nullable|string',
+            'liter'=>'nullable|string',
+            'villa'=>'nullable|string',
+            'parcel'=>'nullable|string',
+            'construction'=>'nullable|string',
+            'build_number'=>'nullable|string',
             'paddress'=>'required',
             'base_address_flag'=>'required',
             'id_user'=>'required',
@@ -232,9 +274,15 @@ class AddressController extends ApiController
      * @param  \App\Models\Address  $address
      * @return \Illuminate\Http\Response
      */
-    public function show(Address $address)
+    public function show($id_address_eas)
     {
-        return new AddressResource($address);
+        $address = Address::find($id_address_eas);
+
+        if (is_null($address)) {
+            return $this->errorResponse('Address does not exist.');
+        }
+        return $this->successResponse('Address successfully fetched.', new AddressResource($address));
+
     }
 
     /**
@@ -297,14 +345,62 @@ class AddressController extends ApiController
      *   example="2"
      * ),
      *   @OA\Property(
-     *   property="id_user",
-     *   description="код пользователя",
-     *   type="integer",
+     *   property="house",
+     *   description="номер дома",
+     *   type="string",
      *   example="2"
      * ),
-     *  @OA\Property(
+     *   @OA\Property(
+     *   property="corpus",
+     *   description="корпус",
+     *   type="string",
+     *   example="2"
+     * ),
+     *   @OA\Property(
+     *   property="liter",
+     *   description="литера",
+     *   type="string",
+     *   example="А"
+     * ),
+     *   @OA\Property(
+     *   property="villa",
+     *   description="номер дачи",
+     *   type="string",
+     *   example="2"
+     * ),
+     *   @OA\Property(
+     *   property="parcel",
+     *   description="номер участка",
+     *   type="string",
+     *   example="2"
+     * ),
+     *   @OA\Property(
+     *   property="construction",
+     *   description="сооружение",
+     *   type="string",
+     *   example="2"
+     * ),
+     *   @OA\Property(
+     *   property="build_number",
+     *   description="номер строения",
+     *   type="string",
+     *   example="2"
+     * ),
+     *   @OA\Property(
+     *   property="paddress",
+     *   description="полный адрес",
+     *   type="string",
+     *   example="Воронежская улица, дом 33"
+     * ),
+     *   @OA\Property(
      *   property="base_address_flag",
      *   description="признак основного адреса",
+     *   type="string",
+     *   example="Y"
+     * ),
+     *   @OA\Property(
+     *   property="id_user",
+     *   description="код пользователя",
      *   type="integer",
      *   example="2"
      * ),
@@ -329,19 +425,25 @@ class AddressController extends ApiController
     public function update(Request $request, Address $address)
     {
         $addresses = Validator::make($request->all(), [
-            'id_address_eas' => 'required',
             'id_building_eas' => 'required',
             'id_raion'=> 'required',
             'id_okrug'=> 'required',
             'id_prefiks'=> 'required',
             'id_geonim'=> 'required',
+            'house'=>'nullable|string',
+            'corpus'=>'nullable|string',
+            'liter'=>'nullable|string',
+            'villa'=>'nullable|string',
+            'parcel'=>'nullable|string',
+            'construction'=>'nullable|string',
+            'build_number'=>'nullable|string',
             'paddress' => 'required',
             'base_address_flag'=> 'required',
             'id_user'=> 'required',
         ]);
 
         if($addresses->fails()){
-            return $this->errorResponse('Error validation11.', $addresses->errors());
+            return $this->errorResponse('Error validation.', $addresses->errors());
         }
 
        $input = $addresses->validated();

@@ -16,7 +16,7 @@ class AuthController extends ApiController
         if(Auth::attempt(['email' => $request->email, 'password' => $request->password])) {
             $user = Auth::user();
 
-            $response['token'] =  $user->createToken($request->device_name)->plainTextToken;
+            $response['token'] =  $user->createToken('auth_token')->plainTextToken;
             $response['name'] =  $user->name;
 
             return $this->successResponse('User successfully logged-in.', $response);
@@ -33,7 +33,6 @@ class AuthController extends ApiController
             'email' => 'required|email|unique:users,email',
             'password' => 'required',
             'confirm_password' => 'required|same:password',
-            'device_name' => 'required'
         ]);
 
         if($validator->fails()){
@@ -44,7 +43,7 @@ class AuthController extends ApiController
         $data['password'] = bcrypt($data['password']);
         $user = User::create($data);
 
-        $response['token'] =  $user->createToken($request->device_name)->plainTextToken;
+        $response['token'] =  $user->createToken('auth_token')->plainTextToken;
         $response['name'] =  $user->name;
 
         return $this->successResponse('User created successfully.', $response);

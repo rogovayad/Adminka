@@ -140,6 +140,34 @@
                                                     "type": "string",
                                                     "example": "код геонима"
                                                 },
+                                                "house": {
+                                                    "type": "string",
+                                                    "example": "номер дома"
+                                                },
+                                                "corpus": {
+                                                    "type": "string",
+                                                    "example": "корпус"
+                                                },
+                                                "liter": {
+                                                    "type": "string",
+                                                    "example": "литера"
+                                                },
+                                                "villa": {
+                                                    "type": "string",
+                                                    "example": "номер дачи"
+                                                },
+                                                "parcel": {
+                                                    "type": "string",
+                                                    "example": "номер участка"
+                                                },
+                                                "construction": {
+                                                    "type": "string",
+                                                    "example": "сооружение"
+                                                },
+                                                "build_number": {
+                                                    "type": "string",
+                                                    "example": "номер строения"
+                                                },
                                                 "paddress": {
                                                     "type": "string",
                                                     "example": "адрес"
@@ -250,13 +278,53 @@
                                         "type": "integer",
                                         "example": "2"
                                     },
-                                    "id_user": {
-                                        "description": "код пользователя",
-                                        "type": "integer",
+                                    "house": {
+                                        "description": "номер дома",
+                                        "type": "string",
                                         "example": "2"
+                                    },
+                                    "corpus": {
+                                        "description": "корпус",
+                                        "type": "string",
+                                        "example": "2"
+                                    },
+                                    "liter": {
+                                        "description": "литера",
+                                        "type": "string",
+                                        "example": "А"
+                                    },
+                                    "villa": {
+                                        "description": "номер дачи",
+                                        "type": "string",
+                                        "example": "2"
+                                    },
+                                    "parcel": {
+                                        "description": "номер участка",
+                                        "type": "string",
+                                        "example": "2"
+                                    },
+                                    "construction": {
+                                        "description": "сооружение",
+                                        "type": "string",
+                                        "example": "2"
+                                    },
+                                    "build_number": {
+                                        "description": "номер строения",
+                                        "type": "string",
+                                        "example": "2"
+                                    },
+                                    "paddress": {
+                                        "description": "полный адрес",
+                                        "type": "string",
+                                        "example": "Воронежская улица, дом 33"
                                     },
                                     "base_address_flag": {
                                         "description": "признак основного адреса",
+                                        "type": "string",
+                                        "example": "Y"
+                                    },
+                                    "id_user": {
+                                        "description": "код пользователя",
                                         "type": "integer",
                                         "example": "2"
                                     }
